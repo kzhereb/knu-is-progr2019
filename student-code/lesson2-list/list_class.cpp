@@ -7,6 +7,7 @@ class Node
 private:
     Node* next;
 public:
+    Node() { data=0; next=nullptr;}
 
     int data;
 
@@ -18,7 +19,7 @@ public:
 void Node::add(int newData)
 {
     Node* current_node = this;
-    while(current_node->next != nullptr)
+    while(current_node->next)
     {
         current_node = current_node->next;
     }
@@ -31,17 +32,23 @@ void Node::add(int newData)
 void Node::print()
 {
     Node* current_node = this;
-    do
-    {
-        cout << current_node->data << ' ';
-        current_node = current_node->next;
+//    do
+//    {
+//        cout << current_node->data << ' ';
+//        current_node = current_node->next;
+//    }
+//    while(current_node->next != nullptr);
+
+    while(current_node) {
+    	cout << current_node->data << ' ';
+    	current_node = current_node->next;
     }
-    while(current_node->next != nullptr);
 }
 
 
 int main()
 {
+	cout<< "test"<<endl;
     Node* myList = new Node;
     myList->add(5);
     myList->add(10);
