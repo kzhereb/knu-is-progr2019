@@ -43,7 +43,7 @@ Listp add_elements_in_sorted_order() {
 
 void print_list(Listp top) {
 
-	Listp p;
+	Listp p = top;
 
 	while (p) {
 		cout << p->value << ' ';
