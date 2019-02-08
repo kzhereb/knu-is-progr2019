@@ -119,7 +119,7 @@ void check_memory_leaks() {
 	}
 }
 
-int main() {
+int main_k18lesson3() {
 
 	List* lst = create_list_sequence(10);
 

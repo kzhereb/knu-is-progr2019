@@ -17,7 +17,7 @@ void lprint(Node *);
 void ldel(Node *);
 //-------------------------
 
-void pointers_demo() {
+void pointers_demo2() {
 	int i = 5;
 	int* ptr = &i;
 	cout << *ptr << endl;
@@ -113,7 +113,7 @@ Node* insert_anywhere(Node*& p_begin, Node*& p_end, int index, int value) {
 	return new_node;
 }
 
-int main() {
+int main_k19lesson3() {
 //	pointers_demo();
 //	return 0;
 

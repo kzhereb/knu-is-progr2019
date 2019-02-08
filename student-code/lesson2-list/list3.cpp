@@ -14,7 +14,7 @@ void print_list(ListPtr);
 void delete_list(ListPtr);
 
 
-int main()
+int main_k18lesson1std1()
 {
     ListPtr p;
     p = create_list(1, 2, 3);

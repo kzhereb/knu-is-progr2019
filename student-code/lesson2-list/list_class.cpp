@@ -46,7 +46,7 @@ void Node::print()
 }
 
 
-int main()
+int main_k19lesson2std2()
 {
 	cout<< "test"<<endl;
     Node* myList = new Node;

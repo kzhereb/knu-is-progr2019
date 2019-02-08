@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+namespace k19lesson2 {
 struct Node {
 	int dat;
 	Node *next;
@@ -141,4 +142,6 @@ void delete_list(Listp p) {
 	delete p;
 	p = t;
 	delete p;
+}
+
 }

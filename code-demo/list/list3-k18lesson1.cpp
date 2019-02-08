@@ -2,7 +2,7 @@
 using namespace std;
 
 // top -> next1 -> next2 -> nullptr;
-
+namespace k18lesson1 {
 struct Node {
 	int data;
 	Node *next;
@@ -20,7 +20,7 @@ ListPtr create_list(int, int, int);
 void print_list(ListPtr);
 void ldel(ListPtr);
 
-int main() {
+int main_k18lesson1() {
 	ListPtr p;
 
 	// top[1] -> next1[2] -> next2[3] -> nullptr;
@@ -78,4 +78,5 @@ void ldel(ListPtr p) {
 	delete p;
 	p = t;
 	delete p;
+}
 }
