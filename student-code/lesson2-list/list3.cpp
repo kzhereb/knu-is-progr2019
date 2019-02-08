@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+namespace k18lesson2std1 {
 struct Node {
     int data;
     Node *next;
@@ -48,4 +48,5 @@ void print_list(ListPtr top) {
         p = p->next;
     }
     cout << endl;
+}
 }
