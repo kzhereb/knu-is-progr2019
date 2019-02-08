@@ -22,19 +22,15 @@ Listp add_elements_in_sorted_order() {
 	cout<<"Enter numbers, 0 or 1000 to stop"<<endl;
 	cin >> in;
 	while (in > 0 && in < 1000) {
-		Listp p;
-		for (p = root; (p->next)->value < in; p = p->next)
+		Listp current;
+		for (current = root; (current->next)->value < in; current = current->next)
 			;
-//		t = p->next;
 
 		Listp new_node = new Listn;
 		new_node->value = in;
-		new_node->next = p->next;
-		p->next = new_node;
+		new_node->next = current->next;
+		current->next = new_node;
 
-//		p->next = new Listn;
-//		(p->next)->value = in;
-//		(p->next)->next = t;
 		cin >> in;
 	}
 	return root;
