@@ -3,7 +3,6 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-
 struct Node {
 	int value;
 	Node *next;
@@ -12,38 +11,45 @@ struct Node {
 typedef Node Listn;
 typedef Node* Listp;
 
-Listp larrange(){
-  int in;
-  Listp t, r = new Listn;
-  r->value = 0; r->next = new Listn;
-  (r->next)->value = 1000; (r->next)->next = nullptr;
-  cin >> in;
-  while (in>0 && in<1000) {Listp p;
-    for (p=r; (p->next)->value < in; p=p->next);
-    t = p->next; p->next = new Listn;
-    (p->next)->value = in; (p->next)->next = t;
-    cin >> in;} return r;
-};
+Listp add_elements_in_sorted_order() {
+	int in;
+	Listp root = new Listn;
+
+	root->value = 0;
+	root->next = new Listn;
+	(root->next)->value = 1000;
+	(root->next)->next = nullptr;
+	cout<<"Enter numbers, 0 or 1000 to stop"<<endl;
+	cin >> in;
+	while (in > 0 && in < 1000) {
+		Listp t, p;
+		for (p = root; (p->next)->value < in; p = p->next)
+			;
+		t = p->next;
+		p->next = new Listn;
+		(p->next)->value = in;
+		(p->next)->next = t;
+		cin >> in;
+	}
+	return root;
+}
+;
 
 void print_list(Listp top) {
 
 	Listp p;
 
-	while(p) {
+	while (p) {
 		cout << p->value << ' ';
-		p=p->next;
+		p = p->next;
 	}
 	cout << endl;
 
 }
 
-
 int main() {
-	Listp lst = larrange();
+	Listp lst = add_elements_in_sorted_order();
 	print_list(lst);
 	return 0;
 }
-
-
-
 
