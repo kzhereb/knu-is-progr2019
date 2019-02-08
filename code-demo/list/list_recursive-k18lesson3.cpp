@@ -12,17 +12,19 @@ struct Node {
 
 struct List {
 	Node* root;
+	Node* last;
 };
 
-Node* create_node_sequence(int count) {
+Node* create_node_sequence(int count, List* lst) {
 	assert(count >= 0);
 	Node* result = new Node;
 	result->value = count;
 	result->prev = nullptr;
 	if (count == 0) {
 		result->next = nullptr;
+		lst->last = result;
 	} else {
-		result->next = create_node_sequence(count - 1);
+		result->next = create_node_sequence(count - 1, lst);
 		result->next->prev = result;
 	}
 	return result;
@@ -30,7 +32,7 @@ Node* create_node_sequence(int count) {
 
 List* create_list_sequence(int count) {
 	List* result = new List;
-	result->root = create_node_sequence(count);
+	result->root = create_node_sequence(count, result);
 	return result;
 }
 
@@ -44,6 +46,22 @@ void print_list_node(Node* root) {
 void print_list(List* lst) {
 	if (lst) {
 		print_list_node(lst->root);
+		cout << endl;
+	} else {
+		cout << "Null list!!" << endl;
+	}
+}
+
+void print_list_node_reversed(Node* root) {
+	if (root) {
+		cout << root->value << " ";
+		print_list_node_reversed(root->prev);
+	}
+}
+
+void print_list_reversed(List* lst) {
+	if (lst) {
+		print_list_node_reversed(lst->last);
 		cout << endl;
 	} else {
 		cout << "Null list!!" << endl;
@@ -124,6 +142,8 @@ int main_k18lesson3() {
 	List* lst = create_list_sequence(10);
 
 	print_list(lst);
+	cout<<"reversed"<<endl;
+	print_list_reversed(lst);
 
 	//print_list_node(lst->root->next->next);
 

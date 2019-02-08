@@ -4,7 +4,7 @@
 
 
 
-int main() {
+int main_1() {
 	using std::cout;
 	using std::endl;
 	using std::cin;
