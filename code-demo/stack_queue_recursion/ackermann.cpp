@@ -5,11 +5,11 @@ const int STACK_SIZE = 100;
 struct mem {
   int ns, xs, ys;
 } st[STACK_SIZE];
-int current_index=STACK_SIZE, n, x, y;
+int current_index=STACK_SIZE;
 
 int acc(int, int, int);
 void adds(int, int, int);
-void reads();
+void reads(int& , int& , int&);
 int accrec(int, int, int);
 int smacc(int, int);
 
@@ -37,15 +37,16 @@ bool stack_empty() {
 //--------------------------------
 //нерекурсивна функція Аккермана
 int acc(int ni, int xi, int yi) {
-  int t;
+  int t, n, x, y;
   adds(ni, xi, yi);
   do {
-  	reads();
+
+  	reads(n,x,y);
   	if (n&&y) adds(n, x, y-1);
   	else {
   		  t = smacc(n, x);
   		  if (++current_index < STACK_SIZE){
-  		  	  reads(); current_index++;
+  		  	  reads(n,x,y); current_index++;
   		  	  adds(n-1, t, x);
   		  	}
   		}
@@ -76,7 +77,7 @@ void adds(int ni, int xi, int yi) {
 }
 //--------------------------------
 //читання з стека st трійки
-void reads() {
+void reads(int& n, int& x, int& y) {
   n = st[current_index].ns; x = st[current_index].xs; y = st[current_index].ys;
 }
 
