@@ -8,8 +8,9 @@ struct mem {
 int current_index = STACK_SIZE;
 
 int acc(int, int, int);
-void adds(int, int, int);
-void reads(int&, int&, int&);
+void push(int, int, int);
+void peek(int&, int&, int&);
+void pop(int&, int&, int&);
 int accrec(int, int, int);
 int smacc(int, int);
 
@@ -37,19 +38,18 @@ bool stack_empty() {
 //нерекурсивна функція Аккермана
 int acc(int ni, int xi, int yi) {
 	int t, n, x, y;
-	adds(ni, xi, yi);
+	push(ni, xi, yi);
 	do {
 
-		reads(n, x, y);
+		peek(n, x, y);
 		if (n && y)
-			adds(n, x, y - 1);
+			push(n, x, y - 1);
 		else {
 			t = smacc(n, x);
 			++current_index;
 			if (!stack_empty()) {
-				reads(n, x, y);
-				current_index++;
-				adds(n - 1, t, x);
+				pop(n,x,y);
+				push(n - 1, t, x);
 			}
 		}
 	} while (!stack_empty());
@@ -75,7 +75,7 @@ int smacc(int n, int x) {
 
 //--------------------------------
 //додавання в стек st нової трійки
-void adds(int ni, int xi, int yi) {
+void push(int ni, int xi, int yi) {
 	if (current_index--) {
 		st[current_index].ns = ni;
 		st[current_index].xs = xi;
@@ -85,9 +85,13 @@ void adds(int ni, int xi, int yi) {
 }
 //--------------------------------
 //читання з стека st трійки
-void reads(int& n, int& x, int& y) {
+void peek(int& n, int& x, int& y) {
 	n = st[current_index].ns;
 	x = st[current_index].xs;
 	y = st[current_index].ys;
 }
 
+void pop(int& n, int& x, int& y) {
+	peek(n,x,y);
+	current_index++;
+}
