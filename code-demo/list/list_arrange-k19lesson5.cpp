@@ -49,7 +49,7 @@ void print_list(Listp top) {
 
 }
 
-int main() {
+int main_k19lesson5() {
 	Listp lst = add_elements_in_sorted_order();
 	print_list(lst);
 	return 0;

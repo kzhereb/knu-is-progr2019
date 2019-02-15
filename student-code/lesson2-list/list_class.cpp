@@ -2,6 +2,7 @@
 
 using namespace std;
 
+namespace k19lesson2std2{
 class Node
 {
 private:
@@ -55,4 +56,5 @@ int main_k19lesson2std2()
     myList->print();
 
     return 0;
+}
 }
