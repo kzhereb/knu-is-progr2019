@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+namespace k18lesson6 {
 const int STACK_SIZE = 100;
 struct mem {
 	int ns, xs, ys;
@@ -22,7 +23,7 @@ void pop(stack_ackermann &, int&, int&, int&);
 int accrec(int, int, int);
 int smacc(int, int);
 
-int main() {
+int main_k18lesson6() {
 	int n, x, y;
 
 	//cin >> n >> x >> y;
@@ -121,4 +122,6 @@ void peek(stack_ackermann const & stack, int& n, int& x, int& y) {
 void pop(stack_ackermann & stack, int& n, int& x, int& y) {
 	peek(stack, n, x, y);
 	stack.current_index++;
+}
+
 }
