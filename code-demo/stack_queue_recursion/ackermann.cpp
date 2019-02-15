@@ -45,7 +45,8 @@ int acc(int ni, int xi, int yi) {
 			adds(n, x, y - 1);
 		else {
 			t = smacc(n, x);
-			if (++current_index < STACK_SIZE) {
+			++current_index;
+			if (!stack_empty()) {
 				reads(n, x, y);
 				current_index++;
 				adds(n - 1, t, x);
