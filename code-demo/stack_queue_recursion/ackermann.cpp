@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-const int M = 100;
+const int STACK_SIZE = 100;
 struct mem {
   int ns, xs, ys;
-} st[M];
-int p=M, n, x, y;
+} st[STACK_SIZE];
+int current_index=STACK_SIZE, n, x, y;
 
 int acc(int, int, int);
 void adds(int, int, int);
@@ -29,6 +29,11 @@ int accrec(int n, int x, int y){
      accrec(n-1, accrec(n, x, y-1), x) :
      smacc(n, x));
 }
+
+bool stack_empty() {
+	return current_index >= STACK_SIZE;
+}
+
 //--------------------------------
 //нерекурсивна функція Аккермана
 int acc(int ni, int xi, int yi) {
@@ -39,12 +44,12 @@ int acc(int ni, int xi, int yi) {
   	if (n&&y) adds(n, x, y-1);
   	else {
   		  t = smacc(n, x);
-  		  if (++p < M){
-  		  	  reads(); p++;
+  		  if (++current_index < STACK_SIZE){
+  		  	  reads(); current_index++;
   		  	  adds(n-1, t, x);
   		  	}
   		}
-  	} while (p < M);
+	} while (!stack_empty());
   return t;
 }
 
@@ -64,15 +69,15 @@ int smacc(int n, int x){
 //--------------------------------
 //додавання в стек st нової трійки
 void adds(int ni, int xi, int yi) {
-  if (p--) {
-  	  st[p].ns = ni; st[p].xs = xi; st[p].ys = yi;
+  if (current_index--) {
+  	  st[current_index].ns = ni; st[current_index].xs = xi; st[current_index].ys = yi;
   	}
   else cout << "Stack full" << endl;
 }
 //--------------------------------
 //читання з стека st трійки
 void reads() {
-  n = st[p].ns; x = st[p].xs; y = st[p].ys;
+  n = st[current_index].ns; x = st[current_index].xs; y = st[current_index].ys;
 }
 
 
