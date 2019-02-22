@@ -15,7 +15,7 @@ struct List {
 };
 
 struct PseudoHashList {
-	static const int MAX_BUCKETS = 100;
+	static const int MAX_BUCKETS = 1000;
 	List buckets[MAX_BUCKETS];
 };
 
@@ -46,7 +46,7 @@ void add_item(PseudoHashList & list, int item) {
 	add_item_to_list(list.buckets[hash], item);
 }
 
-void print_list(List& list) {
+void print_list(List const & list) {
 	Node* curr_node = list.first;
 	while(curr_node) {
 		cout<<curr_node->dat<<" ";
@@ -54,13 +54,13 @@ void print_list(List& list) {
 	}
 }
 
-bool is_empty_list(List& list) {
+bool is_empty_list(List const & list) {
 	return list.first == nullptr;
 }
 
-void print_pseudo_hash_list(PseudoHashList & list) {
+void print_pseudo_hash_list(PseudoHashList const & list) {
 	for(int i=0; i<PseudoHashList::MAX_BUCKETS;i++ ){
-		List& curr_list = list.buckets[i];
+		List const & curr_list = list.buckets[i];
 		if (!is_empty_list(curr_list)) {
 			cout<<i<<": ";
 			print_list(curr_list);
@@ -71,8 +71,6 @@ void print_pseudo_hash_list(PseudoHashList & list) {
 
 void input_into_hash(PseudoHashList & list) {
 	cout << "Enter list (0 to end) : " << endl;
-
-
 	while(true) {
 		int curr_val;
 		cin>> curr_val;
@@ -81,11 +79,39 @@ void input_into_hash(PseudoHashList & list) {
 	}
 }
 
+Node* find_in_list(List const& list, int value) {
+	Node* result = list.first;
+	while (result) {
+		if (result->dat == value) { return result;}
+		result= result->next;
+	}
+	return result;
+}
+
+bool contains(PseudoHashList const & list, int value) {
+	int hash = pseudo_hash(value);
+	if (find_in_list(list.buckets[hash],value)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 int main() {
 
 	PseudoHashList list;
 	input_into_hash(list);
 	print_pseudo_hash_list(list);
+
+	int find_val;
+	cout<<"Enter a value for search:";
+	cin>>find_val;
+	if (contains(list,find_val)) {
+		cout<<"Value found in list"<<endl;
+	} else {
+		cout<<"Value not found"<<endl;
+	}
+
 	return 0;
 
 
