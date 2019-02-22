@@ -6,6 +6,8 @@
 
 using namespace std;
 
+struct Node {int index, val;};
+
 const int MAX_SIZE=10000, MAX_CAPACITY=1800;
 
 int generate_random(){
@@ -22,6 +24,15 @@ int generate_random(){
 
 }
 
+void print_sparse_array(Node* array) {
+	for (int i=0; i<MAX_CAPACITY;i++) {
+		cout<<array[i].index<<": "<<array[i].val<<endl;
+		if (array[i].index>=MAX_SIZE) {
+			cout<<"Total elements:"<<i<<endl;
+			break;}
+	}
+}
+
 
 int main() {
 
@@ -32,21 +43,31 @@ int main() {
 //  return 0;
 
   int i, curr_val, sum;
-  struct {int nm, val;} sparse_array[MAX_CAPACITY], *p;
-  p = sparse_array;
+  Node sparse_array[MAX_CAPACITY], *p;
+  int curr_index = 0;
   //cout << "sparse_array : " << endl;
   for (i=0; i<MAX_SIZE; i++) {
   	  curr_val = generate_random();
   	  if (curr_val == 0) {continue;}
-  	  p->val = curr_val;
-  	  p->nm = i;
-  	  p++;
+  	  p = &(sparse_array[curr_index]);
+	  p->val = curr_val;
+	  p->index = i;
+	  curr_index++;
   	}
-  p->nm = MAX_SIZE; sum = 0; p = sparse_array;
+  p->index = MAX_SIZE;
+  print_sparse_array(sparse_array);
+
+  sum = 0; //p = sparse_array;
+  curr_index = 0;
   //cout << "N : " << endl;
   for (i=0; i<MAX_SIZE; i++) {
 	curr_val = generate_random();
-  	if (i == p->nm) sum += (p++)->val * curr_val;
+	p = &(sparse_array[curr_index]);
+  	if (i == p->index) {
+  		sum += p->val * curr_val;
+  		curr_index++;
+  		//p++;
+  	}
   }
   cout << "PRODUCT = " << sum << endl;
   //system("pause");
