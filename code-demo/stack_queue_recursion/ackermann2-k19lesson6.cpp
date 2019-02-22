@@ -1,5 +1,7 @@
 #include <iostream>
 
+namespace k19lesson6_2 {
+
 struct stack_node {
 	int m;
 	int n;
@@ -83,7 +85,7 @@ int ack2_stack(int m, int n) {
 	return result;
 }
 
-int main() {
+int main_k19lesson6() {
 	using std::cout;
 	using std::endl;
 	int m = 2, n = 3;
@@ -95,3 +97,4 @@ int main() {
 	return 0;
 }
 
+}
