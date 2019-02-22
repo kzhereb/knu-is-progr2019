@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const int MAX_SIZE=10000, MAX_CAPACITY=800;
+const int MAX_SIZE=10000, MAX_CAPACITY=1800;
 
 int generate_random(){
     static std::random_device rd;  //Will be used to obtain a seed for the random number engine
@@ -25,28 +25,31 @@ int generate_random(){
 
 int main() {
 
-  for (int i=0;i<100;i++) {
-	  cout<<generate_random()<<" ";
-  }
-  cout<<endl;
-  return 0;
+//  for (int i=0;i<100;i++) {
+//	  cout<<generate_random()<<" ";
+//  }
+//  cout<<endl;
+//  return 0;
 
-  int i, inp, sum;
+  int i, curr_val, sum;
   struct {int nm, val;} sparse_array[MAX_CAPACITY], *p;
   p = sparse_array;
-  cout << "sparse_array : " << endl;
+  //cout << "sparse_array : " << endl;
   for (i=0; i<MAX_SIZE; i++) {
-  	  inp = generate_random();
-  	  if (p->val = inp) (p++)->nm = i;
+  	  curr_val = generate_random();
+  	  if (curr_val == 0) {continue;}
+  	  p->val = curr_val;
+  	  p->nm = i;
+  	  p++;
   	}
   p->nm = MAX_SIZE; sum = 0; p = sparse_array;
-  cout << "N : " << endl;
+  //cout << "N : " << endl;
   for (i=0; i<MAX_SIZE; i++) {
-    cin >> inp;
-  	if (i == p->nm) sum += (p++)->val * inp;
+	curr_val = generate_random();
+  	if (i == p->nm) sum += (p++)->val * curr_val;
   }
-  cout << "SUM = " << sum << endl;
-  system("pause");
+  cout << "PRODUCT = " << sum << endl;
+  //system("pause");
   return 0;
 }
 
