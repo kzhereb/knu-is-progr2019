@@ -6,6 +6,8 @@
 
 using namespace std;
 
+namespace k18lesson7 {
+
 struct Node {int index, val;};
 
 const int MAX_SIZE=10000, MAX_CAPACITY=1800;
@@ -34,7 +36,7 @@ void print_sparse_array(Node* array) {
 }
 
 
-int main() {
+int main_k18lesson7() {
 
 //  for (int i=0;i<100;i++) {
 //	  cout<<generate_random()<<" ";
@@ -73,7 +75,7 @@ int main() {
   //system("pause");
   return 0;
 }
-
+}
 
 
 

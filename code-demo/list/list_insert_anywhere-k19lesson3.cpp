@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+
+namespace k19lesson3 {
 struct Node {
 	int dat;
 	Node *next;
@@ -272,4 +274,6 @@ void ldel(Node *pbeg) {
 		pbeg = pbeg->next;
 		delete pv;
 	}
+}
+
 }
