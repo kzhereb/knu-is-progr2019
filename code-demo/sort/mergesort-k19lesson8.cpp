@@ -27,11 +27,11 @@ int main() {
 //-------------------
 //нерекурсивне сортування злиттям
 void smerge(int a[], int n) {
-	int *p, *q;
-	q = a + n;
+	int *p, *max_index;
+	max_index = a + n;
 	for (int len = 1; len < n; len *= 2)
-		for (p = a; p + len < q; p += 2 * len)
-			merge(p, len, MIN(len * 2, q - p));
+		for (p = a; p + len < max_index; p += 2 * len)
+			merge(p, len, MIN(len * 2, max_index - p));
 }
 //-------------------
 //рекурсивне сортування злиттям
@@ -46,6 +46,8 @@ void srecmg(int a[], int n) {
 }
 //-------------------
 //злиття двох впорядкованих підмасивів 0,...,l1-1  та  l1,..., l2
+
+//w = sorted1, sorted2
 void merge(int w[], int len1, int len2) {
 	int i, *a, *pa, *pb;
 	a = new int[len2 + 2];  //створення вспоміжного масиву
@@ -56,7 +58,9 @@ void merge(int w[], int len1, int len2) {
 		*pa++ = w[i];
 	for (i = len1; i < len2; i++)
 		*pb++ = w[i];
+	//a = sorted1, 0, sorted2, 0
 	*pa = *pb = MAX(w[len1-1], w[len2-1]) + 1;
+	//a = sorted1, MAX, sorted2, MAX
 	pa = a;
 	pb = a + len1 + 1;
 	for (i = 0; i < len2; i++)
