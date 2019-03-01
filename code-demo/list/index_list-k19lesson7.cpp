@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+namespace k19lesson7{
+
 typedef struct Node {
 	int dat;
 	Node *next;
@@ -167,4 +169,6 @@ void lprint(Listp p) {
 		cout << p->dat << ' ';
 		p = p->next;
 	}
+}
+
 }
