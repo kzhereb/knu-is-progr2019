@@ -7,8 +7,8 @@ typedef struct Node {
 	Node *next;
 } Listn, *Listp;
 
-Listp pocket(Listp, int);
-Listp pocket2(Listp, int);
+Listp pocket(Listp &, int);
+Listp pocket2(Listp &, int);
 Listp lform(int);
 void lprint(Listp);
 
@@ -24,7 +24,7 @@ int main() {
 }
 //-------------------
 //розподільне сортування зв`язного списку
-Listp pocket(Listp q, int t) {
+Listp pocket(Listp& q, int t) {
 	Listp A[10], B[10], r;
 	int k, m;
 	for (m = 1; t--; m *= 10) {
@@ -52,17 +52,16 @@ Listp pocket(Listp q, int t) {
 	return q;
 }
 
-Listp pocket2(Listp q, int t) {
+Listp pocket2(Listp& q, int t) {
 	Listp pocket_start[10], pocket_end[10], r;
 	int k, m;
 	for (m = 1; t--; m *= 10) {
-		cout<<m<<", t="<<t<<endl;
+		//cout<<m<<", t="<<t<<endl;
 		for (k = 0; k < 10; k++) //розподіл по кишеням
 			pocket_start[k] = pocket_end[k] = nullptr;
 		while(q) {
-
 			k = (q->dat / m) % 10; // digit of q->dat
-			cout<<q->dat<<" ->"<<k<<endl;
+			//cout<<q->dat<<" ->"<<k<<endl;
 
 			if (!pocket_start[k])
 				pocket_start[k] = q;
@@ -71,26 +70,17 @@ Listp pocket2(Listp q, int t) {
 			pocket_end[k]=q;
 			q=q->next;
 			pocket_end[k]->next = nullptr;
-			lprint(pocket_start[k]);
-//			B[k] = q;
 		}
-		for (k=0;k<10;k++) {
-			cout<<k<<": ";
-			lprint(pocket_start[k]);
-		}
-		//bool first_found = false;
 		Listp last = nullptr;
 		for (k=0;k<10;k++) {
 			if (!pocket_start[k]) continue;
 			if (!last) {
 				q = pocket_start[k];
-				//first_found = true;
 			} else {
 				last->next = pocket_start[k];
 			}
 			r = pocket_start[k];
 			while(r) {
-
 				if (r->next == nullptr) {
 					last = r;
 				}
@@ -98,18 +88,6 @@ Listp pocket2(Listp q, int t) {
 			}
 
 		}
-		cout<<m<<", t="<<t<<endl;
-		lprint(q);
-//		for (k = 0; !A[k]; k++)
-//			; //складання непорожніх кишень
-//		q = A[k];
-//		r = B[k];
-//		for (k++; k < 10; k++)
-//			if (A[k]) {
-//				r->next = A[k];
-//				r = B[k];
-//			}
-//		r->next = NULL;
 	}
 	return q;
 }
