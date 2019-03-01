@@ -4,6 +4,8 @@
 #define MAX(x, y) ((y)<(x)?(x):(y))
 using namespace std;
 
+
+namespace k19lesson8_1 {
 const int k = 10;
 int arr[k];
 
@@ -82,4 +84,5 @@ void aprint(int a[], int n) {
 	for (int i = 0; i < n; i++)
 		cout << a[i] << ' ';
 	cout << endl;
+}
 }
