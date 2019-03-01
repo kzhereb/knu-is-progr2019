@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
+#include <cassert>
 //using namespace std;
 using std::cout;
 using std::endl;
@@ -24,12 +25,9 @@ int main() {
 	cout << "Sorted Again ";
 	aprint(arr, k); //відображення масиву після сортування
 
-//	gen(arr, k);
-//	aprint(arr, k);
-//	quicksort_array(arr, 0, k-1);  //сортування
-//	cout << "Sorted without pointers ";
-//	aprint(arr, k); //відображення масиву після сортування
-	//system("pause");
+	quicksort_array(arr, 0, k-1);  //сортування
+	cout << "Sorted without pointers ";
+	aprint(arr, k); //відображення масиву після сортування
 	return 0;
 }
 
@@ -37,13 +35,16 @@ int main() {
 //швидке сортування елементів *low, ..., *hi
 void quick(int *low, int *hi) {
 	int pivot, *left, *right;
+	if (low>=hi) {return;}
 
-	if (hi-low<=1) {
+	if (hi-low==1) {
 		if (*low > *hi  ) {
 			swap(hi, low);
+			return;
 		}
-		return;
+
 	}
+	//if ((hi-low == 1) && (*hi < *low)) swap(hi, low);
 
 	if (hi - low > 1) {
 		left = low + 1;
@@ -76,12 +77,13 @@ void quick(int *low, int *hi) {
 
 void quicksort_array(int array[], int low, int hi) {
 	int pivot, left, right;
-
-	if (hi-low<=1) {
+	if (low>=hi) {return;}
+	if (hi-low==1) {
 		if (array[low] > array[hi]  ) {
 			std::swap(array[hi], array[low]);
+			return;
 		}
-		return;
+
 	}
 
 	if (hi - low > 1) {
