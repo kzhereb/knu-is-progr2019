@@ -6,6 +6,8 @@
 using std::cout;
 using std::endl;
 
+
+namespace k18lesson8 {
 const int k = 10;
 int arr[k];
 
@@ -40,9 +42,8 @@ void quick(int *low, int *hi) {
 	if (hi-low==1) {
 		if (*low > *hi  ) {
 			swap(hi, low);
-			return;
 		}
-
+		return;
 	}
 	//if ((hi-low == 1) && (*hi < *low)) swap(hi, low);
 
@@ -137,4 +138,6 @@ void aprint(int a[], int n) {
 	for (int i = 0; i < n; i++)
 		cout << a[i] << ' ';
 	cout << endl;
+}
+
 }
