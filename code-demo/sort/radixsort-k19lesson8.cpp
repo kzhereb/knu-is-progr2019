@@ -52,6 +52,30 @@ Listp pocket(Listp& q, int t) {
 	return q;
 }
 
+Listp merge_pockets(Listp pocket_start[10]) {
+	int k;
+
+	Listp q, r=nullptr, last = nullptr;
+	for (k = 0; k < 10; k++) {
+		if (!pocket_start[k])
+			continue;
+
+		if (!last) {
+			q = pocket_start[k];
+		} else {
+			last->next = pocket_start[k];
+		}
+		r = pocket_start[k];
+		while (r) {
+			if (r->next == nullptr) {
+				last = r;
+			}
+			r = r->next;
+		}
+	}
+	return q;
+}
+
 Listp pocket2(Listp& q, int t) {
 	Listp pocket_start[10], pocket_end[10], r;
 	int k, m;
@@ -71,23 +95,7 @@ Listp pocket2(Listp& q, int t) {
 			q=q->next;
 			pocket_end[k]->next = nullptr;
 		}
-		Listp last = nullptr;
-		for (k=0;k<10;k++) {
-			if (!pocket_start[k]) continue;
-			if (!last) {
-				q = pocket_start[k];
-			} else {
-				last->next = pocket_start[k];
-			}
-			r = pocket_start[k];
-			while(r) {
-				if (r->next == nullptr) {
-					last = r;
-				}
-				r=r->next;
-			}
-
-		}
+		q=merge_pockets(pocket_start);
 	}
 	return q;
 }
