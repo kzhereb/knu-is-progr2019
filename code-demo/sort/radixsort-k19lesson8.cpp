@@ -2,6 +2,7 @@
 #include <cstdlib>
 using namespace std;
 
+namespace k19lesson9_2 {
 typedef struct Node {
 	int dat;
 	Node *next;
@@ -122,4 +123,6 @@ void lprint(Listp p) {
 		p = p->next;
 	}
 	cout << endl;
+}
+
 }
