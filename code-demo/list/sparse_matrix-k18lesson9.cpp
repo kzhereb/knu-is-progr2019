@@ -111,6 +111,34 @@ void print_array_matrix(int result[][MAX_COLUMNS], int row_count, int column_cou
 	}
 }
 
+void SumMtr(const Listp A[], const Listp B[], Listp C[], int nn, int mm){
+  Listp p, pa, pb, pc;
+  for (int i=0; i<nn; i++) //перебір рядків
+   {pa = A[i]; pb = B[i];
+  	pc = new Node; C[i] = pc;
+  	while (pa && pb) //обидва рядки не закінчились
+  	{if (pa->col == pb->col){
+  		pc->col = pa->col; pc->dat = pa->dat + pb->dat;
+  		pa = pa->next; pb = pb->next;
+  		} else if (pa->col < pb->col){
+  			   pc->col = pa->col; pc->dat = pa->dat; pa = pa->next;
+  			} else {
+  				 pc->col = pb->col; pc->dat = pb->dat; pb = pb->next;}
+  	 if (pc->dat)  //результатом додавання може бути 0
+  		{p = pc; pc = new Node; p->next = pc;}
+  	 }//while
+   if (pb) pa = pb; //вибір непереглянутого до кінця рядка
+   while (pa){ //копіювання рядка, що залишився
+   	   pc->col = pa->col; pc->dat = pa->dat; pa = pa->next;
+   	    p = pc; pc = new Node; p->next = pc;
+   	}//while
+   //дооформлення списку
+   if (pc == C[i]) C[i] = NULL;
+   else p->next = NULL;
+   delete pc;
+   }//for
+}
+
 int main() {
 	//cout << "Nothing works yet" << endl;
 	SparseMatrix matrix(5,7);
@@ -128,6 +156,15 @@ int main() {
 	int arr_matrix[MAX_ROWS][MAX_COLUMNS];
 	IndMtr(matrix, arr_matrix);
 	print_array_matrix(arr_matrix,5,7);
+
+	SparseMatrix matrix2(5,7);
+	add_element(matrix2,0,0,-10);
+	add_element(matrix2,3,1,87);
+
+	cout<<"Matrix sum"<<endl;
+	SparseMatrix matrix3(5,7);
+	SumMtr(matrix.rows,matrix2.rows, matrix3.rows, matrix.row_count, matrix.column_count);
+	print_matrix(matrix3);
 
 	return 0;
 }
