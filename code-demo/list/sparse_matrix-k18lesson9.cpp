@@ -5,6 +5,8 @@
 using std::cout;
 using std::endl;
 
+namespace k18lesson9 {
+
 //Відновлення розрідженої матриці по її
 //послідовно-зв`язаному індексному зберіганню
 const int MAX_ROWS = 10, MAX_COLUMNS = 40;
@@ -167,5 +169,7 @@ int main() {
 	print_matrix(matrix3);
 
 	return 0;
+}
+
 }
 
