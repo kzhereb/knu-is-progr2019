@@ -37,6 +37,7 @@ void add_element(SparseMatrix& matrix, int row, int col, int value) {
 		if ( (row < current->next->row) ||
 				(row == current->next->row &&
 				col < current->next->col ) ) {
+			if (value== 0) { return; }
 			new_node->next = current->next;
 			current->next = new_node;
 			return;
