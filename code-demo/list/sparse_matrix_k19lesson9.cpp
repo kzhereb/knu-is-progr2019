@@ -44,7 +44,10 @@ void add_element(SparseMatrix& matrix, int row, int col, int value) {
 		} else if (row == current->next->row &&
 				col == current->next->col) {
 			if (value == 0) {
-
+				Node* tmp = current->next;
+				current->next = current->next->next;
+				delete tmp;
+				return;
 			} else {
 				current->next->value = value;
 				return;
@@ -77,6 +80,7 @@ int main() {
 	print_matrix_as_list(matrix);
 	cout<<"Change value"<<endl;
 	add_element(matrix, 2, 1, 43);
+	add_element(matrix, 1, 2, 0);
 	print_matrix_as_list(matrix);
 	return 0;
 }
