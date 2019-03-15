@@ -66,6 +66,31 @@ void print_matrix_as_list(SparseMatrix const& matrix) {
 	}
 }
 
+void print_as_matrix(SparseMatrix const& matrix) {
+	if (matrix.row_count>10 || matrix.col_count>10) {
+		cout<<"Matrix is too big, use print_matrix_as_list"<<endl;
+		return;
+	}
+	Node* current = matrix.start;
+	for(int i=0;i<matrix.row_count;i++) {
+		for(int j=0;j<matrix.col_count;j++) {
+			if (current == nullptr) {
+				cout<<"0 ";
+				continue;
+			}
+			if (i== current->row && j == current->col) {
+				cout<<current->value<<" ";
+				current=current->next;
+			} else {
+				cout<<"0 ";
+			}
+
+		}
+		cout<<endl;
+	}
+
+}
+
 
 
 int main() {
@@ -78,10 +103,12 @@ int main() {
 	add_element(matrix, 0, 2, 0);
 
 	print_matrix_as_list(matrix);
+	print_as_matrix(matrix);
 	cout<<"Change value"<<endl;
 	add_element(matrix, 2, 1, 43);
 	add_element(matrix, 1, 2, 0);
 	print_matrix_as_list(matrix);
+	print_as_matrix(matrix);
 	return 0;
 }
 
