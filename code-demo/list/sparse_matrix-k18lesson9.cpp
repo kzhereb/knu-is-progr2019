@@ -87,18 +87,27 @@ void print_matrix(SparseMatrix const & matrix ) {
 	}
 }
 
-void IndMtr(const Listp A[], int B[][MAX_COLUMNS], int nn, int mm) {
+void IndMtr(SparseMatrix const& matrix, int result[][MAX_COLUMNS]) {
 	Listp p;
 	int i, j;
-	for (i = 0; i < nn; i++)
-		for (j = 0; j < mm; j++)
-			B[i][j] = 0;
-	for (i = 0; i < nn; i++) {
-		p = A[i];
+	for (i = 0; i < matrix.row_count; i++)
+		for (j = 0; j < matrix.column_count; j++)
+			result[i][j] = 0;
+	for (i = 0; i < matrix.row_count; i++) {
+		p = matrix.rows[i];
 		while (p) {
-			B[i][p->col] = p->dat;
+			result[i][p->col] = p->dat;
 			p = p->next;
 		}
+	}
+}
+
+void print_array_matrix(int result[][MAX_COLUMNS], int row_count, int column_count) {
+	for (int i=0; i<row_count;i++) {
+		for (int j=0; j<column_count; j++) {
+			cout<<result[i][j]<<" ";
+		}
+		cout<<endl;
 	}
 }
 
@@ -112,8 +121,13 @@ int main() {
 	add_element(matrix,0,5,14);
 
 	print_matrix(matrix);
+	cout<<"Change element on same index"<<endl;
 	add_element(matrix,0,5,42);
 	print_matrix(matrix);
+	cout<<"Regular matrix"<<endl;
+	int arr_matrix[MAX_ROWS][MAX_COLUMNS];
+	IndMtr(matrix, arr_matrix);
+	print_array_matrix(arr_matrix,5,7);
 
 	return 0;
 }
