@@ -21,8 +21,25 @@ void add_to_list(Listp& list, int col, int dat) {
 
 	if (list) {
 		Listp cur = list;
-		while (cur->next) {cur=cur->next;}
-
+		if (cur->col>col) {
+			new_node->next = cur;
+			list = new_node;
+			return;
+		} else if (cur->col == col) {
+			cur->dat = dat;
+			return;
+		}
+		while (cur->next) {
+			if (cur->next->col > col) {
+				new_node->next = cur->next;
+				cur->next = new_node;
+				return;
+			} else if (cur->next->col == col) {
+				cur->next->dat = dat;
+				return;
+			}
+			cur=cur->next;
+		}
 		cur->next = new_node;
 	} else {
 		list = new_node;
@@ -90,10 +107,12 @@ int main() {
 	SparseMatrix matrix(5,7);
 	add_element(matrix,0,0,10);
 	add_element(matrix,1,3, 12);
+	add_element(matrix,1,0, 45);
 	add_element(matrix,4,6,-23);
-	for(int i=0;i<matrix.row_count;i++) {
-		cout<<matrix.rows[i]<<endl;
-	}
+	add_element(matrix,0,5,14);
+
+	print_matrix(matrix);
+	add_element(matrix,0,5,42);
 	print_matrix(matrix);
 
 	return 0;
