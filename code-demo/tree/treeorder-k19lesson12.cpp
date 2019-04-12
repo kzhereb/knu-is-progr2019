@@ -135,6 +135,21 @@ void print_tree(const Tree& tree) {
 	print_tree_node(tree.root);
 }
 
+void print_tree_node_preorder(TreeNode* node) {
+	if (!node) return;
+	cout<<node->value<<" ";
+	print_tree_node_preorder(node->left);
+	print_tree_node_preorder(node->right);
+}
+
+void print_tree_node_postorder(TreeNode* node) {
+	if (!node) return;
+
+	print_tree_node_postorder(node->left);
+	print_tree_node_postorder(node->right);
+	cout<<node->value<<" ";
+}
+
 int main() {
 	srand(time(nullptr));
 
@@ -143,6 +158,11 @@ int main() {
 		insert_into_tree_random(tree,generate_int(0,100));
 	}
 	print_tree(tree);
+	cout<<endl;
+	print_tree_node_preorder(tree.root);
+	cout<<endl;
+	print_tree_node_postorder(tree.root);
+	cout<<endl;
 
 	return 0;
 }
