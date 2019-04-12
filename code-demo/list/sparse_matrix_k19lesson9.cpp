@@ -5,6 +5,8 @@ using std::cout;
 using std::endl;
 
 
+namespace k19lesson9 {
+
 struct Node {
 	int row, col;
 	int value;
@@ -291,3 +293,4 @@ int main() {
 
 
 
+}
