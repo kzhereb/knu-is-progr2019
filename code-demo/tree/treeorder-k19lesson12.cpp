@@ -12,6 +12,9 @@
 using std::cout;
 using std::endl;
 
+
+namespace k19lesson12 {
+
 const float PROBABILITY_LEFT = 0.5;
 const float PROBABILITY_HERE = 0.5;
 
@@ -167,3 +170,4 @@ int main() {
 	return 0;
 }
 
+}
