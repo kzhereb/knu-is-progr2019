@@ -28,14 +28,14 @@ struct GraphMatr {
 	}
 };
 
-void add_edge(GraphMatr& graph, int from, int to ){
+void add_edge(GraphMatr& graph, int from, int to, int weight=1 ){
 	if (from>=graph.vertex_count
 			|| to>=graph.vertex_count) {
 		throw std::invalid_argument("Vertex not in graph");
 	}
-	graph.adjacent[from][to] = 1;
+	graph.adjacent[from][to] = weight;
 	if (!graph.is_oriented) {
-		graph.adjacent[to][from] = 1;
+		graph.adjacent[to][from] = weight;
 	}
 }
 
@@ -45,7 +45,7 @@ void print_edges(const GraphMatr& graph) {
 		if (!graph.is_oriented) { j = i+1; }
 		for (; j<graph.vertex_count;j++) {
 			if (graph.adjacent[i][j]) {
-				cout<<"("<<i<<","<<j<<") ";
+				cout<<"("<<i<<","<<j<<",w="<<graph.adjacent[i][j]<<") ";
 			}
 		}
 	}
