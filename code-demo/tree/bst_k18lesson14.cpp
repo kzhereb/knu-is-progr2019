@@ -3,6 +3,8 @@
 #include <iostream>
 using namespace std;
 
+
+namespace k18lesson14 {
 const int NMAX = 100;
 typedef struct BTN {
 	int dat;
@@ -205,3 +207,4 @@ BINTRP delmax(BINTRP p, BINTRP t) {
 	return p;
 }
 
+}
