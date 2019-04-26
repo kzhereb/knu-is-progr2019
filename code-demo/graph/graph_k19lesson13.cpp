@@ -8,6 +8,7 @@
 using std::cout;
 using std::endl;
 
+namespace k19lesson13 {
 const int MAX_VERTICES = 20;
 
 struct GraphMatr {
@@ -124,6 +125,8 @@ void print_edges(const GraphStruct& graph) {
 	}
 }
 
+//GraphStruct convert_to_struct(const GraphMatr&);
+//GraphMatr convert_to_matr(const GraphStruct&);
 
 
 int main() {
@@ -137,3 +140,4 @@ int main() {
 }
 
 
+}
