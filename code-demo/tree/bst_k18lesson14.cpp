@@ -89,7 +89,9 @@ BINTRP build(int a[], int n) {
 	int m;
 	if (n) {
 		m = n / 2;
-		return (nwnode(a[m], build(&a[0], m), build(&a[m + 1], n - m - 1)));
+		return nwnode(a[m],
+				build(&a[0], m),
+				build(&a[m + 1], n - m - 1));
 	}
 	return NULL;
 }
