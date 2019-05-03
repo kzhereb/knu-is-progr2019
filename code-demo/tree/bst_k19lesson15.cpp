@@ -35,7 +35,7 @@ TreeNode** find_prev(TreeNode* root) {
 
 	TreeNode** cur = &(root->left);
 	while((*cur)->right) {
-		*cur = (*cur)->right;
+		cur = &((*cur)->right);
 	}
 	return cur;
 }
