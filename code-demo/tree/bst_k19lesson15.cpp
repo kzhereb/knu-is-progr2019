@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 using std::cout;
 using std::endl;
 
@@ -28,6 +29,51 @@ bool insert(TreeNode** root, int val) {
 	return false;
 }
 
+TreeNode** find_prev(TreeNode* root) {
+	assert(root!=nullptr);
+	assert(root->left!=nullptr);
+
+	TreeNode** cur = &(root->left);
+	while((*cur)->right) {
+		*cur = (*cur)->right;
+	}
+	return cur;
+}
+
+void remove(TreeNode** root, int val) {
+	if(*root==nullptr) {
+		return;
+	}
+	if (val<(*root)->value) {
+		remove(&((*root)->left),val);
+	} else if (val>(*root)->value) {
+		remove(&((*root)->right),val);
+	} else {
+		if ((*root)->left) {
+			if ((*root)->right) { //both children
+				TreeNode** prev_node = find_prev(*root);
+				(*root)->value = (*prev_node)->value;
+				TreeNode* tmp = (*prev_node)->left;
+				delete * prev_node;
+				*prev_node = tmp;
+			} else { //only left child
+				TreeNode* tmp = (*root)->left;
+				delete *root;
+				*root = tmp;
+			}
+		} else {
+			if ((*root)->right) { //only right child
+				TreeNode* tmp = (*root)->right;
+				delete *root;
+				*root = tmp;
+			} else { //no children
+				delete *root;
+				*root = nullptr;
+			}
+		}
+	}
+}
+
 void print_inorder(const TreeNode * root) {
 	if (!root) {
 		//cout<<"Empty tree"<<endl;
@@ -42,6 +88,8 @@ void print_inorder(const TreeNode * root) {
 
 
 
+
+
 int main() {
 	TreeNode* root = nullptr;
 	insert(&root,5);
@@ -51,6 +99,10 @@ int main() {
 	insert(&root,0);
 	insert(&root,7);
 
+	print_inorder(root);
+	cout<<endl;
+
+	remove(&root,5);
 	print_inorder(root);
 	return 0;
 }
