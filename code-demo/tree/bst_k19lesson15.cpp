@@ -74,14 +74,15 @@ void remove(TreeNode** root, int val) {
 	}
 }
 
-void print_inorder(const TreeNode * root) {
+void print_inorder(const TreeNode * root, bool is_top=true) {
 	if (!root) {
-		//cout<<"Empty tree"<<endl;
+		if (is_top) {cout<<"Empty tree"<<endl;}
 		return;
 	}
-	print_inorder(root->left);
+	print_inorder(root->left,false);
 	cout<<root->value<<" ";
-	print_inorder(root->right);
+	print_inorder(root->right,false);
+	if (is_top) {cout<<endl;}
 }
 
 
@@ -100,9 +101,10 @@ int main() {
 	insert(&root,7);
 
 	print_inorder(root);
-	cout<<endl;
 
 	remove(&root,5);
+	print_inorder(root);
+	remove(&root,8);
 	print_inorder(root);
 	return 0;
 }
