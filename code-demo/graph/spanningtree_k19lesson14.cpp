@@ -11,6 +11,8 @@
 using std::cout;
 using std::endl;
 
+
+namespace k19lesson14 {
 const int MAX_VERTICES = 20;
 
 struct GraphMatr {
@@ -170,4 +172,5 @@ int main() {
 	auto span_tree2 = min_spanning_tree_djp(graph);
 	print_edges(span_tree2);
 
+}
 }
